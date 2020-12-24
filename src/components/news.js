@@ -2,9 +2,11 @@ import React, { useState } from 'react';
 import {
     Card, CardImg, CardText, CardBody,
     CardTitle, CardSubtitle,
-    Container, Row, Col,
-    Button, Modal, ModalBody, ModalFooter
+    Row, Col,
+    Button, Modal, ModalBody, ModalFooter,
+    Badge
 } from 'reactstrap';
+
 
 const News = (props) => {
     const { news } = props;
@@ -26,6 +28,13 @@ const News = (props) => {
         modalComponent = <Modal isOpen={modal} toggle={toggle} >
                     <ModalBody>
                         <CardImg top width="100%" height="230px" src={modalNews.image} alt="Card image cap" />
+
+                        <Badge className="m-t-10  first-letter-uppercase" color="info" pill>{modalNews.section}</Badge>
+                        {
+                            modalNews.category !== modalNews.section ?
+                                <Badge className="m-t-10 m-l-10 first-letter-uppercase" color="info" pill>{modalNews.category}</Badge>
+                            : ''
+                        }
                         
                         <CardTitle className="m-t-10" tag="h5">{modalNews.title}</CardTitle>
                         <CardSubtitle tag="h6" className="m-t-10 mb-2 text-muted">{modalNews.byline} at {(new Date(modalNews.date)).toLocaleDateString('en-US')}</CardSubtitle>
@@ -40,18 +49,24 @@ const News = (props) => {
     }
 
     return (
-        <Container className="m-b-30" >
-            <Row className="m-t-30">
+        <div className="m-b-30" >
+            <Row>
                 {
                     news.map((news, i) => (
-                        <Col xs="12" sm="12" md="6" lg="4" className="m-t-30 d-flex align-items-stretch " key={i} data-id={i} onClick={toggle.bind(this, i)}>
+                        <Col xs="12" sm="12" md="6" lg="4" className={news.section + ' ' + news.category + ' m-t-30 d-flex align-items-stretch news'} key={i} data-id={i} onClick={toggle.bind(this, i)}>
                             <Card className="add-pointer">
                                 {news.image ?
                                     <CardImg top width="100%" height="230px" src={news.image} alt="Card image cap" />
                                     : ''
                                 }
                                 <CardBody>
-                                    <CardTitle tag="h5">{news.title} Teste</CardTitle>
+                                    <Badge className="m-b-10 first-letter-uppercase" color="info" pill>{news.section}</Badge>
+                                    {
+                                        news.category !== news.section ?
+                                            <Badge className="m-b-10 m-l-10 first-letter-uppercase" color="info" pill>{news.category}</Badge>
+                                        : ''
+                                    }
+                                    <CardTitle tag="h5">{news.title}</CardTitle>
                                     <CardSubtitle tag="h6" className="mb-2 text-muted">{news.byline} at {(new Date(news.date)).toLocaleDateString('en-US')}</CardSubtitle>
                                     <CardText>{news.abstract}</CardText>
                                 </CardBody>
@@ -61,7 +76,7 @@ const News = (props) => {
                 }
             </Row>
             {modalComponent}
-        </Container>
+        </div>
     );
 };
 

@@ -5,6 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #f8f7f6;
 }
 
 code {
@@ -20,10 +21,31 @@ code {
   margin-top: 10px;
 }
 
+.m-l-10 {
+  margin-left: 10px;
+}
+
+.m-b-10 {
+  margin-bottom: 10px;
+}
+
 .m-b-30 {
   margin-bottom: 30px;
 }
 
 .add-pointer {
   cursor: pointer;
+}
+
+.first-letter-uppercase {
+    text-transform:capitalize;
+}
+
+.center-spinner {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  min-height: 100vh;
 }
